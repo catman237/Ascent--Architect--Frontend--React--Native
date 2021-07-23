@@ -10,7 +10,7 @@ import ClimbCard from './ClimbCard'
       }
 
     return (
-     <ScrollView style={StyleSheet.scrollView}>
+     <ScrollView>
              {showClimbs()}
      </ScrollView>
     )
@@ -18,9 +18,3 @@ import ClimbCard from './ClimbCard'
 
 export default ClimbsContainer
 
-const styles = StyleSheet.create({
-    scrollView: {
-        backgroundColor: 'pink',
-        marginHorizontal: 20,
-    }
-})

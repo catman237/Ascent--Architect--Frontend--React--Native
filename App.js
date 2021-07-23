@@ -50,7 +50,7 @@ export default function App() {
 
       </View>
 
-      <ScrollView style={styles.scrollView}>
+      <ScrollView>
 
         {toggle2
           ?
@@ -117,9 +117,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
     padding: 8,
     borderRadius: 30,
-  },
-  scrollView: {
-    backgroundColor: 'pink',
-    marginHorizontal: 20,
   }
 });
