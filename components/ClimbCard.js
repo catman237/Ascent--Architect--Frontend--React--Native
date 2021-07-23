@@ -10,7 +10,6 @@ const ClimbCard = (props) => {
     const addSession = () => {
         const newSession = props.climb.sessions += 1
         setSession(newSession)
-        console.warn(session)
     }
     
     return (
@@ -23,6 +22,7 @@ const ClimbCard = (props) => {
                 <Button title='Working Day' style={styles.button}
                  onPress={() => addSession()} />
                 <Button title='Sent' style={styles.button} />
+                <Button title='Quit'/>
             </View>
         </View>
     )

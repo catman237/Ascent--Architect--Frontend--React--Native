@@ -26,6 +26,7 @@ export default function App() {
     fetch(baseURL)
       .then(res => res.json())
       .then(climbs => setClimbs(climbs))
+
   }, [stale])
 
 
@@ -35,24 +36,25 @@ export default function App() {
       <Image source={{ uri: photo }} style={styles.photo}></Image>
 
       <View style={styles.buttonContainer}>
+
         <View style={styles.flexRow}>
           <TouchableOpacity style={styles.buttonL}
             onPress={() => switchScreens(setToggle2, toggle2)}>
             <Text>New Project</Text>
           </TouchableOpacity>
-
-          <View style={styles.buttonContainer} >
-            <TouchableOpacity style={styles.buttonR}
-              onPress={() => switchScreens(setToggle1, toggle1)}>
-              <Text>My Projects</Text>
-            </TouchableOpacity>
-          </View>
-
         </View>
+
+        <View style={styles.flexRow} >
+          <TouchableOpacity style={styles.buttonR}
+            onPress={() => switchScreens(setToggle1, toggle1)}>
+            <Text>My Projects</Text>
+          </TouchableOpacity>
+        </View>
+
 
       </View>
 
-      <ScrollView>
+      <View style={{ flex: 1 }}>
 
         {toggle2
           ?
@@ -61,9 +63,6 @@ export default function App() {
           <AddAClimb setStale={setStale} />
         }
 
-      </ScrollView>
-
-      <ScrollView>
 
         {toggle1
           ?
@@ -72,7 +71,7 @@ export default function App() {
             style={styles.climbsContainer} />
           :
           null}
-      </ScrollView>
+      </View>
 
     </SafeAreaView>
   );
@@ -94,28 +93,33 @@ const styles = StyleSheet.create({
   flexRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    flex: 1,
+    height: 60,
     alignItems: 'center'
   },
-  buttonL: {
+  flexRowL: {
+    alignItems: 'flex-end',
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 0,
+  },
+  buttonContainer: {
+  alignItems: 'center',
+  flexDirection: 'row',
+  justifyContent: 'space-around',
+  marginTop: 10,
+  marginBottom: 0
+  },
+  buttonR: {
     width: 100,
     textAlign: 'left',
-    marginLeft: 25,
     backgroundColor: 'orange',
     padding: 8,
     paddingLeft: 11.5,
     borderRadius: 30
   },
-  buttonContainer: {
-    alignItems: 'flex-end',
-    flex: 1,
-    marginTop: 10
-
-  },
-  buttonR: {
+  buttonL: {
     width: 100,
-    textAlign: 'right',
-    marginRight: 25,
+    
     backgroundColor: 'orange',
     padding: 8,
     borderRadius: 30,

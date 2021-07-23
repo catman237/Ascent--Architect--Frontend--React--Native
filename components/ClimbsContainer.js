@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import ClimbCard from './ClimbCard'
 
     const ClimbsContainer = (props) => {
@@ -10,7 +10,7 @@ import ClimbCard from './ClimbCard'
       }
 
     return (
-     <ScrollView>
+     <ScrollView style={styles.container}>
              {showClimbs()}
      </ScrollView>
     )
@@ -18,3 +18,8 @@ import ClimbCard from './ClimbCard'
 
 export default ClimbsContainer
 
+const styles = StyleSheet.create({
+    container: {
+    flexGrow: 1
+    }
+})
