@@ -12,6 +12,7 @@ export default function App() {
 
   const [climbs, setClimbs] = useState([])
   const [sentClimbs, setSentClimbs] = useState([])
+  const [sessions, setSessions] = useState([])
   const [photo, setPhoto] = useState(backgroundPhoto)
   const [toggle1, setToggle1] = useState(false)
   const [toggle2, setToggle2] = useState(true)
@@ -26,6 +27,7 @@ export default function App() {
       .then(res => res.json())
       .then(climbs => setClimbs(climbs))
   }, [stale])
+
 
   return (
     <SafeAreaView style={styles.container}>
