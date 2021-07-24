@@ -8,7 +8,7 @@ export default function App() {
 
 
   const backgroundPhoto = 'https://www.planetmountain.com/Rock/falesie/106/margalef.jpg'
-  const baseURL = 'http://localhost:5000/climbs'
+  const climbsUrl = 'http://localhost:5000/climbs'
 
   const [climbs, setClimbs] = useState([])
   const [sentClimbs, setSentClimbs] = useState([])
@@ -22,11 +22,23 @@ export default function App() {
     setState(!state)
   }
 
+  const handleSubmit = (method, url, body) => {
+    const options = {
+        'method': method,
+        'headers': {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(body)
+    }
+    fetch(url,options)
+    .then(setStale(!stale))
+}
+
   useEffect(() => {
-    fetch(baseURL)
+    fetch(climbsUrl)
       .then(res => res.json())
       .then(climbs => setClimbs(climbs))
-
   }, [stale])
 
 
@@ -60,7 +72,8 @@ export default function App() {
           ?
           null
           :
-          <AddAClimb setStale={setStale} />
+          <AddAClimb 
+          setStale={setStale} />
         }
 
 
@@ -68,7 +81,8 @@ export default function App() {
           ?
           <ClimbsContainer
             climbs={climbs}
-            style={styles.climbsContainer} />
+            style={styles.climbsContainer}
+            handleSubmit={handleSubmit} />
           :
           null}
       </View>
@@ -83,8 +97,9 @@ const styles = StyleSheet.create({
   },
   photo: {
     flex: 1,
-    marginTop: -20,
+    marginTop: -100,
     width: '100%',
+    
   },
   climbsContainer: {
     backgroundColor: 'yellow',

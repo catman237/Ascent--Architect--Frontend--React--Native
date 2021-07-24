@@ -6,10 +6,12 @@ const AddAClimb = (props) => {
     const [name, setName] = useState('')
     const [grade, setGrade] = useState('')
     const [description, setDescription] = useState('')
+    const [sent, setSent] = useState(false)
+    const [sessions, setSessions] = useState(0)
     const [stale, setStale] = useState(false)
 
     const climbsURL = 'http://localhost:5000/climbs'
-    const reqBody = {name, grade, description}
+    const reqBody = {name, grade, description, sessions, sent}
 
 
     const formReset = () => {
@@ -57,6 +59,7 @@ const AddAClimb = (props) => {
                 value={description}
                 onChangeText={text => setDescription(text)}
             />
+
 
             <View style={styles.buttonContainer}>
                 <Button 

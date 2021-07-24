@@ -5,7 +5,7 @@ import ClimbCard from './ClimbCard'
     const ClimbsContainer = (props) => {
       const showClimbs = () => {
           return props.climbs.map(climb => {
-              return <ClimbCard climb={climb} key={climb.id}/>
+              return <ClimbCard climb={climb} key={climb.id} handleSubmit={props.handleSubmit}/>
           })
       }
 
@@ -20,6 +20,7 @@ export default ClimbsContainer
 
 const styles = StyleSheet.create({
     container: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginLeft: 12
     }
 })
