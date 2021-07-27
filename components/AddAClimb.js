@@ -9,15 +9,20 @@ const AddAClimb = (props) => {
     const [sent, setSent] = useState(false)
     const [sessions, setSessions] = useState(0)
     const [stale, setStale] = useState(false)
+    const [height, setHeight] = useState("not listed")
+    const [isBoulder, setIsBoulder] = useState(false)
+    const [terrain, setTerrain] = useState('not listed')
+    
 
-    const climbsURL = 'http://localhost:5000/climbs'
-    const reqBody = {name, grade, description, sessions, sent}
+    const climbsURL = 'http://localhost:9000/climbs'
+    const reqBody = {name, grade, description, sessions, sent, height, isBoulder, terrain}
 
 
     const formReset = () => {
         setName('')
         setGrade('')
         setDescription('')
+        props.setStale(!props.stale)
     }
 
     const handleSubmit = (url, body, callback) => {
@@ -31,8 +36,9 @@ const AddAClimb = (props) => {
         }
         fetch(url,options)
         .then(callback)
-        .then(props.setStale(!stale))
+        .then(props.setStale(!props.stale))
     }
+
 
     return (
         <View style={styles.formContainer} >

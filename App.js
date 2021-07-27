@@ -8,7 +8,7 @@ export default function App() {
 
 
   const backgroundPhoto = 'https://www.planetmountain.com/Rock/falesie/106/margalef.jpg'
-  const climbsUrl = 'http://localhost:5000/climbs'
+  const climbsUrl = 'http://localhost:9000/climbs'
 
   const [climbs, setClimbs] = useState([])
   const [sentClimbs, setSentClimbs] = useState([])
@@ -73,7 +73,9 @@ export default function App() {
           null
           :
           <AddAClimb 
-          setStale={setStale} />
+          setStale={setStale}
+          stale={stale}
+           />
         }
 
 
