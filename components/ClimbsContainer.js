@@ -5,7 +5,12 @@ import ClimbCard from './ClimbCard'
     const ClimbsContainer = (props) => {
       const showClimbs = () => {
           return props.climbs.map(climb => {
-              return <ClimbCard climb={climb} key={climb.id} handleSubmit={props.handleSubmit}/>
+              return <ClimbCard 
+              climb={climb} 
+              key={climb.id} 
+              handleSubmit={props.handleSubmit} 
+              loggedIn={props.loggedIn}
+              setLoggedIn={props.setLoggedIn}/>
           })
       }
 

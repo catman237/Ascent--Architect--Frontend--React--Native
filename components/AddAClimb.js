@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import { set } from 'react-native-reanimated'
 
 const AddAClimb = (props) => {
 
@@ -7,7 +8,7 @@ const AddAClimb = (props) => {
     const [grade, setGrade] = useState('')
     const [description, setDescription] = useState('')
     const [sent, setSent] = useState(false)
-    const [sessions, setSessions] = useState(0)
+    const [sessions, setSessions] = useState('')
     const [stale, setStale] = useState(false)
     const [height, setHeight] = useState('')
     const [isBoulder, setIsBoulder] = useState(false)
@@ -22,6 +23,9 @@ const AddAClimb = (props) => {
         setName('')
         setGrade('')
         setDescription('')
+        setSessions('')
+        setTerrain('')
+        setHeight('')
         props.setStale(!props.stale)
     }
 
@@ -81,6 +85,13 @@ const AddAClimb = (props) => {
                 onChangeText={text => setTerrain(text)}
             />
 
+            <TextInput
+                style={styles.inputContainer}
+                placeholder="Height"
+                value={height}
+                onChangeText={text => setHeight(text)}
+            />
+
             <View style={styles.buttonContainer}>
                 <Button
                     title='Add This Climb'
@@ -100,6 +111,8 @@ const styles = StyleSheet.create({
 
     inputContainer: {
         borderWidth: 1,
+        borderColor: '#B5CA8D',
+        backgroundColor: '#F2F2F2',
         width: 300,
         height: 40,
         borderRadius: 40 / 2,
@@ -110,7 +123,9 @@ const styles = StyleSheet.create({
     formContainer: {
         height: 300,
         alignItems: 'center',
-        flex: .5
+        paddingTop: 100,
+        flex: 1,
+        backgroundColor: '#222E50'
     },
     buttonContainer: {
         backgroundColor: '#ADC698',
@@ -122,7 +137,7 @@ const styles = StyleSheet.create({
 
     },
     header: {
-        color: 'black',
+        color: '#FFEECF',
         fontSize: 50,
         fontWeight: 'bold',
     }

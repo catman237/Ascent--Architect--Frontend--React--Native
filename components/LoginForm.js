@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import { AsyncStorage } from 'react-native';
 
 const LoginForm = (props) => {
@@ -18,7 +18,6 @@ const LoginForm = (props) => {
 
         props.handleLogin('POST', reqBody, loginUrl)
             .then(data => {
-                console.log('token', data)
                 if (data.message) {
                     setError(data.message)
                 } else {
@@ -30,10 +29,11 @@ const LoginForm = (props) => {
 
 
     return (
-
+        
         <View style={styles.form}>
-
+          
             <Text style={styles.formText}>Please Sign In</Text>
+            
             <TextInput
                 style={styles.formInput}
                 placeholder="Username"
@@ -49,18 +49,43 @@ const LoginForm = (props) => {
                 secureTextEntry={true}
             />
 
-            <Button title='Get user' onPress={() => {
+            {/* <Button title='Login' onPress={() => {
                 AsyncStorage.getItem('token')
-                .then(token => {
-                    fetch(climbsUrl,{
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
+                    .then(token => {
+                        fetch(climbsUrl, {
+                            headers: {
+                                Authorization: `Bearer ${token}`
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(climbs => props.setClimbs(climbs))
+                            .then(props.setLoggedIn(true))
+                            .then(console.log(props.loggedIn))
                     })
-                    .then(res => res.json())
-                    .then(climbs => props.setClimbs(climbs))
-                })
-            }} />
+            }} /> */}
+
+            <View>
+                <TouchableOpacity
+                    title='Sign In'
+                    onPress={() => {
+                        AsyncStorage.getItem('token')
+                            .then(token => {
+                                fetch(climbsUrl, {
+                                    headers: {
+                                        Authorization: `Bearer ${token}`
+                                    }
+                                })
+                                    .then(res => res.json())
+                                    .then(climbs => props.setClimbs(climbs))
+                                    .then(props.setLoggedIn(true))
+                                    .then(console.log(props.loggedIn))
+                            })
+                    }}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}> Login </Text>
+                </TouchableOpacity>
+            </View>
 
 
         </View>
@@ -71,10 +96,16 @@ export default LoginForm
 
 const styles = StyleSheet.create({
     form: {
-        flex: .7,
+        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#222E50'
     },
+    formText: {
+        color: '#FFEECF',
+        fontSize: 50,
+        fontWeight: 'bold',
+    },  
     formInput: {
         borderWidth: 1,
         width: 300,
@@ -82,5 +113,19 @@ const styles = StyleSheet.create({
         borderRadius: 40 / 2,
         marginTop: 10,
         padding: 10,
+        backgroundColor: '#F2F2F2'
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 120,
+        height: 30,
+        borderWidth: .5,
+        borderRadius: 8,
+        marginTop: 20,
+        backgroundColor: '#B5CA8D',  //olivine      
+    },
+    buttonText: {
+        fontSize: 16,
     }
 })

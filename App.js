@@ -23,6 +23,7 @@ export default function App() {
   const [toggle1, setToggle1] = useState(false)
   const [toggle2, setToggle2] = useState(true)
   const [stale, setStale] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
 
 
   const handleLogin = (method, body, url) => {
@@ -55,7 +56,7 @@ export default function App() {
   //   fetch(climbsUrl)
   //     .then(res => res.json())
   //     .then(climbs => setClimbs(climbs))
-  // }, [stale])
+  // }, [loggedIn])
 
   const stack = createStackNavigator()
 
@@ -71,7 +72,10 @@ export default function App() {
         <stack.Screen name='Projects'>
           {(stackProps) => <ClimbsContainer
             climbs={climbs}
-            handleSubmit={handleSubmit} />}
+            handleSubmit={handleSubmit} 
+            loggedIn={loggedIn}
+            setLoggedIn={setLoggedIn}
+            />}
         </stack.Screen>
 
         <stack.Screen name='Login'>
@@ -80,6 +84,8 @@ export default function App() {
             setUser={setUser}
             handleLogin={handleLogin} 
             setClimbs={setClimbs}
+            setLoggedIn={setLoggedIn}
+            loggedIn={loggedIn}
             />}
         </stack.Screen>
 
