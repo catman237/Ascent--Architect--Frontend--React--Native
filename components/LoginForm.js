@@ -3,10 +3,10 @@ import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
 import { AsyncStorage } from 'react-native';
 
 const LoginForm = (props) => {
-    const climbsUrl = 'http://localhost:9000/climbs'
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const loginUrl = 'http://localhost:9000/login'
+    const climbsUrl = 'http://localhost:9000/climbs'
 
     const handleSubmit = (e) => {
         props.setUser({
@@ -49,13 +49,6 @@ const LoginForm = (props) => {
                 secureTextEntry={true}
             />
 
-            <Button title='Login' onPress={() => handleSubmit()} />
-
-            <Button title='Token getter' onPress={() => {
-                AsyncStorage.getItem('token')
-                    .then(token => console.log('token', token))
-            }} />
-
             <Button title='Get user' onPress={() => {
                 AsyncStorage.getItem('token')
                 .then(token => {
@@ -65,7 +58,7 @@ const LoginForm = (props) => {
                         }
                     })
                     .then(res => res.json())
-                    .then(users => console.log('users', users))
+                    .then(climbs => props.setClimbs(climbs))
                 })
             }} />
 

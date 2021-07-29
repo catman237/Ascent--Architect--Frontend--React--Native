@@ -51,11 +51,11 @@ export default function App() {
       .then(setStale(!stale))
   }
 
-  useEffect(() => {
-    fetch(climbsUrl)
-      .then(res => res.json())
-      .then(climbs => setClimbs(climbs))
-  }, [stale])
+  // useEffect(() => {
+  //   fetch(climbsUrl)
+  //     .then(res => res.json())
+  //     .then(climbs => setClimbs(climbs))
+  // }, [stale])
 
   const stack = createStackNavigator()
 
@@ -65,7 +65,8 @@ export default function App() {
 
         <stack.Screen
           name='Home'
-          component={Home} />
+          component={Home} 
+          />
 
         <stack.Screen name='Projects'>
           {(stackProps) => <ClimbsContainer
@@ -77,7 +78,9 @@ export default function App() {
           {(stackProps) => <LoginForm
             user={user}
             setUser={setUser}
-            handleLogin={handleLogin} />}
+            handleLogin={handleLogin} 
+            setClimbs={setClimbs}
+            />}
         </stack.Screen>
 
         <stack.Screen name='Add a project'>
