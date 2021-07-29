@@ -8,12 +8,14 @@ const ClimbCard = (props) => {
     const initSession = props.climb.sessions
     const send = props.climb.sent
     
+
     const [sessions, setSessions] = useState(initSession)
     const [sent, setSent] = useState(send)
-    
+
     const addSession = () => {
-        setSessions(initSession + 1)
-        const reqBody = {sessions}
+        const newSessions = initSession + 1
+        setSessions(newSessions)
+        const reqBody = { sessions: newSessions }
         handleSubmit('PATCH', climbUrl, reqBody)
     }
 
@@ -21,11 +23,11 @@ const ClimbCard = (props) => {
         handleSubmit('DELETE', climbUrl)
         Alert.alert(`Deleted ${props.climb.name}`)
     }
-    
+
     const sendClimb = () => {
         setSent(!sent)
-        const reqBody = {sent: sent} 
-        handleSubmit('PATCH', climbUrl, reqBody )
+        const reqBody = { sent: sent }
+        handleSubmit('PATCH', climbUrl, reqBody)
         Alert.alert(`Congrats you sent ${props.climb.name} in ${props.climb.sessions} sessions`)
     }
 
@@ -39,19 +41,19 @@ const ClimbCard = (props) => {
             <Text style={styles.cardContent}>Height: {props.climb.height}</Text>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    style={styles.button}
+                    style={styles.buttonP}
                     onPress={() => addSession()}>
                     <Text>Projected</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={styles.button}
+                    style={styles.buttonS}
                     onPress={() => sendClimb()}>
                     <Text>Sent</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={styles.button}
+                    style={styles.buttonR}
                     onPress={() => removeClimb()}
                 >
                     <Text>Remove</Text>
@@ -61,6 +63,7 @@ const ClimbCard = (props) => {
     )
 }
 
+
 export default ClimbCard
 
 const styles = StyleSheet.create({
@@ -69,7 +72,8 @@ const styles = StyleSheet.create({
         borderWidth: 2.5,
         margin: 5,
         paddingLeft: 5,
-        borderRadius: 20
+        borderRadius: 20,
+        backgroundColor: '#FFFFFF'
     },
     cardContentTitle: {
         padding: 5,
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center'
     },
-    button: {
+    buttonP: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
@@ -92,7 +96,30 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         height: 25,
         width: 100,
-        margin: 3
+        margin: 3,
+        backgroundColor: '#FA7E61'
+    },
+    buttonS: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderRadius: 20,
+        height: 25,
+        width: 100,
+        margin: 3,
+        backgroundColor: '#B5CA8D'
+    },
+    buttonR: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderRadius: 20,
+        height: 25,
+        width: 100,
+        margin: 3,
+        backgroundColor: '#F9F7F3'
     }
 })
 

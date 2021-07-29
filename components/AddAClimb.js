@@ -9,13 +9,13 @@ const AddAClimb = (props) => {
     const [sent, setSent] = useState(false)
     const [sessions, setSessions] = useState(0)
     const [stale, setStale] = useState(false)
-    const [height, setHeight] = useState("not listed")
+    const [height, setHeight] = useState('')
     const [isBoulder, setIsBoulder] = useState(false)
-    const [terrain, setTerrain] = useState('not listed')
-    
+    const [terrain, setTerrain] = useState('')
+
 
     const climbsURL = 'http://localhost:9000/climbs'
-    const reqBody = {name, grade, description, sessions, sent, height, isBoulder, terrain}
+    const reqBody = { name, grade, description, sessions, sent, height, isBoulder, terrain }
 
 
     const formReset = () => {
@@ -32,11 +32,11 @@ const AddAClimb = (props) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify(body)
+            body: JSON.stringify(body)
         }
-        fetch(url,options)
-        .then(callback)
-        .then(props.setStale(!props.stale))
+        fetch(url, options)
+            .then(callback)
+            .then(props.setStale(!props.stale))
     }
 
 
@@ -66,15 +66,30 @@ const AddAClimb = (props) => {
                 onChangeText={text => setDescription(text)}
             />
 
+            <TextInput
+                style={styles.inputContainer}
+                placeholder="Sessions"
+                value={sessions}
+                keyboardType={'numbers-and-punctuation'}
+                onChangeText={text => setSessions(text)}
+            />
+
+            <TextInput
+                style={styles.inputContainer}
+                placeholder="Terrain"
+                value={terrain}
+                onChangeText={text => setTerrain(text)}
+            />
 
             <View style={styles.buttonContainer}>
-                <Button 
-                title='Add This Climb'  
-                style={styles.button} 
-                onPress={() => handleSubmit(climbsURL, reqBody, formReset())}/>
+                <Button
+                    title='Add This Climb'
+                    style={styles.button}
+                    onPress={() => handleSubmit(climbsURL, reqBody, formReset())} />
             </View>
 
         </View>
+
     )
 }
 
@@ -104,7 +119,7 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 40 / 2,
         marginTop: 10,
-       
+
     },
     header: {
         color: 'black',

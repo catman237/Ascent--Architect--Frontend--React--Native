@@ -3,6 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import ClimbsContainer from './components/ClimbsContainer';
 import AddAClimb from './components/AddAClimb';
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import Home from './components/Home';
+import LoginForm from './components/LoginForm';
+import { startClock } from 'react-native-reanimated';
 
 export default function App() {
 
@@ -11,6 +16,7 @@ export default function App() {
   const climbsUrl = 'http://localhost:9000/climbs'
 
   const [climbs, setClimbs] = useState([])
+  const [user, setUser] = useState([])
   const [sentClimbs, setSentClimbs] = useState([])
   const [sessions, setSessions] = useState([])
   const [photo, setPhoto] = useState(backgroundPhoto)
@@ -18,22 +24,32 @@ export default function App() {
   const [toggle2, setToggle2] = useState(true)
   const [stale, setStale] = useState(false)
 
-  const switchScreens = (setState, state) => {
-    setState(!state)
+
+  const handleLogin = (method, body, url) => {
+    const options = {
+      'method': method,
+      'headers': {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }
+    return fetch(url, options)
+      .then(res => res.json())
   }
 
   const handleSubmit = (method, url, body) => {
     const options = {
-        'method': method,
-        'headers': {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(body)
+      'method': method,
+      'headers': {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
     }
-    fetch(url,options)
-    .then(setStale(!stale))
-}
+    fetch(url, options)
+      .then(setStale(!stale))
+  }
 
   useEffect(() => {
     fetch(climbsUrl)
@@ -41,55 +57,35 @@ export default function App() {
       .then(climbs => setClimbs(climbs))
   }, [stale])
 
+  const stack = createStackNavigator()
 
   return (
-    <SafeAreaView style={styles.container}>
+    <NavigationContainer>
+      <stack.Navigator>
 
-      <Image source={{ uri: photo }} style={styles.photo}></Image>
+        <stack.Screen
+          name='Home'
+          component={Home} />
 
-      <View style={styles.buttonContainer}>
-
-        <View style={styles.flexRow}>
-          <TouchableOpacity style={styles.buttonL}
-            onPress={() => switchScreens(setToggle2, toggle2)}>
-            <Text>New Project</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.flexRow} >
-          <TouchableOpacity style={styles.buttonR}
-            onPress={() => switchScreens(setToggle1, toggle1)}>
-            <Text>My Projects</Text>
-          </TouchableOpacity>
-        </View>
-
-
-      </View>
-
-      <View style={{ flex: 1 }}>
-
-        {toggle2
-          ?
-          null
-          :
-          <AddAClimb 
-          setStale={setStale}
-          stale={stale}
-           />
-        }
-
-
-        {toggle1
-          ?
-          <ClimbsContainer
+        <stack.Screen name='Projects'>
+          {(stackProps) => <ClimbsContainer
             climbs={climbs}
-            style={styles.climbsContainer}
-            handleSubmit={handleSubmit} />
-          :
-          null}
-      </View>
+            handleSubmit={handleSubmit} />}
+        </stack.Screen>
 
-    </SafeAreaView>
+        <stack.Screen name='Login'>
+          {(stackProps) => <LoginForm
+            user={user}
+            setUser={setUser}
+            handleLogin={handleLogin} />}
+        </stack.Screen>
+
+        <stack.Screen name='Add a project'>
+          {(stackProps) => <AddAClimb setStale={setStale} />}
+        </stack.Screen>
+
+      </stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -101,7 +97,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: -100,
     width: '100%',
-    
   },
   climbsContainer: {
     backgroundColor: 'yellow',
@@ -120,11 +115,11 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   buttonContainer: {
-  alignItems: 'center',
-  flexDirection: 'row',
-  justifyContent: 'space-around',
-  marginTop: 10,
-  marginBottom: 0
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 10,
+    marginBottom: 0
   },
   buttonR: {
     width: 100,
@@ -136,9 +131,58 @@ const styles = StyleSheet.create({
   },
   buttonL: {
     width: 100,
-    
+
     backgroundColor: 'orange',
     padding: 8,
     borderRadius: 30,
   }
 });
+// const switchScreens = (setState, state) => {
+//   setState(!state)
+// }
+
+// <SafeAreaView style={styles.container}>
+
+//   <Image source={{ uri: photo }} style={styles.photo}></Image>
+
+//   <View style={styles.buttonContainer}>
+
+//     <View style={styles.flexRow}>
+//       <TouchableOpacity style={styles.buttonL}
+//         onPress={() => switchScreens(setToggle2, toggle2)}>
+//         <Text>New Project</Text>
+//       </TouchableOpacity>
+//     </View>
+
+//     <View style={styles.flexRow} >
+//       <TouchableOpacity style={styles.buttonR}
+//         onPress={() => switchScreens(setToggle1, toggle1)}>
+//         <Text>My Projects</Text>
+//       </TouchableOpacity>
+//     </View>
+
+
+//   </View>
+
+//   <View style={{ flex: 1 }}>
+
+//     {toggle2
+//       ?
+//       null
+//       :
+//       <AddAClimb 
+//       setStale={setStale} />
+//     }
+
+
+//     {toggle1
+//       ?
+//       <ClimbsContainer
+//         climbs={climbs}
+//         style={styles.climbsContainer}
+//         handleSubmit={handleSubmit} />
+//       :
+//       null}
+//   </View>
+
+// </SafeAreaView>
