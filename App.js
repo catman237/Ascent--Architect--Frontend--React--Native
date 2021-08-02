@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, SafeAreaView, AsyncStorage } from 'react-native';
 import ClimbsContainer from './components/ClimbsContainer';
 import AddAClimb from './components/AddAClimb';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';
-import { startClock } from 'react-native-reanimated';
+
 
 export default function App() {
 
@@ -16,7 +16,7 @@ export default function App() {
   const climbsUrl = 'http://localhost:9000/climbs'
 
   const [climbs, setClimbs] = useState([])
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState()
   const [sentClimbs, setSentClimbs] = useState([])
   const [sessions, setSessions] = useState([])
   const [photo, setPhoto] = useState(backgroundPhoto)
@@ -27,6 +27,7 @@ export default function App() {
 
 
   const handleLogin = (method, body, url) => {
+    console.log(url)
     const options = {
       'method': method,
       'headers': {
@@ -39,24 +40,50 @@ export default function App() {
       .then(res => res.json())
   }
 
-  const handleSubmit = (method, url, body) => {
+  const handleSubmit = async (method, url, body) => {
+    const token = await AsyncStorage.getItem('token');
+    console.log('got token', token)
+
     const options = {
       'method': method,
       'headers': {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(body)
     }
+
     fetch(url, options)
-      .then(setStale(!stale))
+      .then(resp => resp.json())
+      .then(console.log)
+      .then(() => {
+        fetch(climbsUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then(res => res.json())
+          .then(climbs => setClimbs(climbs))
+      })
   }
 
-  // useEffect(() => {
-  //   fetch(climbsUrl)
-  //     .then(res => res.json())
-  //     .then(climbs => setClimbs(climbs))
-  // }, [loggedIn])
+  useEffect(() => {
+    const refreshClimbs = async () => {
+      const token = await AsyncStorage.getItem('token');
+      fetch(climbsUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(res => res.json())
+        .then(climbs => setClimbs(climbs))
+    }
+    if (user) {
+      refreshClimbs();
+    }
+
+  }, [user])
 
   const stack = createStackNavigator()
 
@@ -66,27 +93,28 @@ export default function App() {
 
         <stack.Screen
           name='Home'
-          component={Home} 
-          />
+          component={Home}
+        />
 
         <stack.Screen name='Projects'>
           {(stackProps) => <ClimbsContainer
             climbs={climbs}
-            handleSubmit={handleSubmit} 
+            handleSubmit={handleSubmit}
             loggedIn={loggedIn}
             setLoggedIn={setLoggedIn}
-            />}
+          />}
         </stack.Screen>
 
         <stack.Screen name='Login'>
-          {(stackProps) => <LoginForm
+          {({ navigation }) => <LoginForm
             user={user}
             setUser={setUser}
-            handleLogin={handleLogin} 
+            handleLogin={handleLogin}
             setClimbs={setClimbs}
             setLoggedIn={setLoggedIn}
             loggedIn={loggedIn}
-            />}
+            navigation={navigation}
+          />}
         </stack.Screen>
 
         <stack.Screen name='Add a project'>

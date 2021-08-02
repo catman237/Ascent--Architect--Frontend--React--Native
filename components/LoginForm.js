@@ -22,6 +22,7 @@ const LoginForm = (props) => {
                     setError(data.message)
                 } else {
                     AsyncStorage.setItem('token', data.token)
+                    props.navigation.push('Projects')
                 }
 
             })
@@ -68,18 +69,7 @@ const LoginForm = (props) => {
                 <TouchableOpacity
                     title='Sign In'
                     onPress={() => {
-                        AsyncStorage.getItem('token')
-                            .then(token => {
-                                fetch(climbsUrl, {
-                                    headers: {
-                                        Authorization: `Bearer ${token}`
-                                    }
-                                })
-                                    .then(res => res.json())
-                                    .then(climbs => props.setClimbs(climbs))
-                                    .then(props.setLoggedIn(true))
-                                    .then(console.log(props.loggedIn))
-                            })
+                        handleSubmit()
                     }}
                     style={styles.button}
                 >
