@@ -6,7 +6,9 @@ import AddAClimb from './components/AddAClimb';
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from './components/Home';
+import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
+import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
 export default function App() {
@@ -27,7 +29,6 @@ export default function App() {
 
 
   const handleLogin = (method, body, url) => {
-    console.log(url)
     const options = {
       'method': method,
       'headers': {
@@ -42,7 +43,6 @@ export default function App() {
 
   const handleSubmit = async (method, url, body) => {
     const token = await AsyncStorage.getItem('token');
-    console.log('got token', token)
 
     const options = {
       'method': method,
@@ -91,17 +91,32 @@ export default function App() {
     <NavigationContainer>
       <stack.Navigator>
 
-        <stack.Screen
-          name='Home'
-          component={Home}
-        />
+        <stack.Screen name='Home'>
+          {(stackProps) => <Home
+            climbs={climbs}
+            {...stackProps}
+          />}
+        </stack.Screen>
+
+        <stack.Screen name='Sign Up'>
+          {({ navigation }) => <SignUpForm
+                user={user}
+                setUser={setUser}
+                handleLogin={handleLogin}
+                handleSubmit={handleSubmit}
+                setClimbs={setClimbs}
+                loggedIn={loggedIn}
+                navigation={navigation}
+          />}
+        </stack.Screen>
+
 
         <stack.Screen name='Projects'>
-          {(stackProps) => <ClimbsContainer
+          {({ navigation }) => <ClimbsContainer
             climbs={climbs}
             handleSubmit={handleSubmit}
             loggedIn={loggedIn}
-            setLoggedIn={setLoggedIn}
+            navigation={navigation}
           />}
         </stack.Screen>
 
@@ -111,16 +126,18 @@ export default function App() {
             setUser={setUser}
             handleLogin={handleLogin}
             setClimbs={setClimbs}
-            setLoggedIn={setLoggedIn}
             loggedIn={loggedIn}
             navigation={navigation}
           />}
         </stack.Screen>
 
         <stack.Screen name='Add a project'>
-          {(stackProps) => <AddAClimb setStale={setStale} />}
+          {({ navigation }) => <AddAClimb
+            handleSubmit={handleSubmit} 
+            navigation={navigation}
+            />}
         </stack.Screen>
-
+        
       </stack.Navigator>
     </NavigationContainer>
   );

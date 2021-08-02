@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { AsyncStorage } from 'react-native';
 
-const LoginForm = (props) => {
+const SignUpForm = (props) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const loginUrl = 'http://localhost:9000/login'
+    const userUrl = 'http://localhost:9000/users'
     const climbsUrl = 'http://localhost:9000/climbs'
 
     const handleSubmit = (e) => {
@@ -16,24 +16,21 @@ const LoginForm = (props) => {
 
         const reqBody = { user: { username, password } }
 
-        props.handleLogin('POST', reqBody, loginUrl)
+        props.handleLogin('POST', reqBody, userUrl)
             .then(data => {
-                if (data.message) {
-                    setError(data.message)
+                if (data.massege) {
+                    setError(data.massege)
                 } else {
                     AsyncStorage.setItem('token', data.token)
-                    props.navigation.push('Projects')
                 }
-
             })
     }
-
 
     return (
         
         <View style={styles.form}>
           
-            <Text style={styles.formText}>Welcome Back</Text>
+            <Text style={styles.formText}>Sign Up</Text>
             
             <TextInput
                 style={styles.formInput}
@@ -56,9 +53,8 @@ const LoginForm = (props) => {
                     onPress={() => {
                         handleSubmit()
                     }}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>Login</Text>
+                    style={styles.button}>
+                    <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
 
@@ -66,7 +62,8 @@ const LoginForm = (props) => {
     )
 }
 
-export default LoginForm
+export default SignUpForm
+
 
 const styles = StyleSheet.create({
     form: {

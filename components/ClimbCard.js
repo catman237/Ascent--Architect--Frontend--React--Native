@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity, Alert, AsyncStorage } from 'react-native'
 
 const ClimbCard = (props) => {
-    console.log(props.handleSubmit)
+
     const climbUrl = `http://localhost:9000/climbs/${props.climb.id}`
     const handleSubmit = props.handleSubmit
     const initSession = props.climb.sessions
@@ -19,7 +19,6 @@ const ClimbCard = (props) => {
         setSessions(newSessions)
         const reqBody = { sessions: newSessions }
         handleSubmit('PATCH', climbUrl, reqBody)
-        console.warn('ADDED SESSION')
     }
 
     const removeClimb = () => {

@@ -10,7 +10,7 @@ const Home = (props) => {
     return (
      <View style={styles.homePage}>
          <Text style={styles.title}>Ascent Architect</Text>
-         <View>
+         {/* <View>
              <TouchableOpacity 
              title='Sign In'
              onPress={() => handlePress('Projects')}
@@ -18,7 +18,7 @@ const Home = (props) => {
              >
                  <Text style={styles.buttonText}> My Projects </Text>
              </TouchableOpacity>
-         </View>
+         </View> */}
          <View>
              <TouchableOpacity 
              title='Sign In'
@@ -30,11 +30,11 @@ const Home = (props) => {
          </View>
          <View>
              <TouchableOpacity 
-             title='Add a project'
-             onPress={() => handlePress('Add a project')}
+             title='Sign Up'
+             onPress={() => handlePress('Sign Up')}
              style={styles.button}
              >
-                 <Text style={styles.buttonText}> Add a project </Text>
+                 <Text style={styles.buttonText}> Sign Up </Text>
              </TouchableOpacity>
          </View>
 

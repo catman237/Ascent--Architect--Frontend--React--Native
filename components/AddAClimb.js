@@ -9,7 +9,6 @@ const AddAClimb = (props) => {
     const [description, setDescription] = useState('')
     const [sent, setSent] = useState(false)
     const [sessions, setSessions] = useState('')
-    const [stale, setStale] = useState(false)
     const [height, setHeight] = useState('')
     const [isBoulder, setIsBoulder] = useState(false)
     const [terrain, setTerrain] = useState('')
@@ -26,23 +25,8 @@ const AddAClimb = (props) => {
         setSessions('')
         setTerrain('')
         setHeight('')
-        props.setStale(!props.stale)
+        props.navigation.goBack()
     }
-
-    const handleSubmit = (url, body, callback) => {
-        const options = {
-            'method': 'POST',
-            'headers': {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        }
-        fetch(url, options)
-            .then(callback)
-            .then(props.setStale(!props.stale))
-    }
-
 
     return (
         <View style={styles.formContainer} >
@@ -96,7 +80,7 @@ const AddAClimb = (props) => {
                 <Button
                     title='Add This Climb'
                     style={styles.button}
-                    onPress={() => handleSubmit(climbsURL, reqBody, formReset())} />
+                    onPress={() => props.handleSubmit('POST' ,climbsURL, reqBody, formReset())} />
             </View>
 
         </View>
