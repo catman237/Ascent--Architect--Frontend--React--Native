@@ -24,7 +24,11 @@ const ClimbsContainer = (props) => {
 
     return (
         <> 
-        <Header navigation={props.navigation} handleSubmit={props.handleSubmit} />
+        <Header
+         navigation={props.navigation} 
+        handleSubmit={props.handleSubmit} 
+        setUser={props.setUser}
+        />
         <ScrollView style={styles.container}>
             {showClimbs()}
         </ScrollView>

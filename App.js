@@ -44,7 +44,7 @@ export default function App() {
 
   const handleSubmit = async (method, url, body) => {
     const token = await AsyncStorage.getItem('token');
-
+    console.log(token)
     const options = {
       'method': method,
       'headers': {
@@ -57,7 +57,6 @@ export default function App() {
 
     fetch(url, options)
       .then(resp => resp.json())
-      .then(console.log)
       .then(() => {
         fetch(climbsUrl, {
           headers: {
@@ -72,6 +71,7 @@ export default function App() {
   useEffect(() => {
     const refreshClimbs = async () => {
       const token = await AsyncStorage.getItem('token');
+      console.log(token)
       fetch(climbsUrl, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -122,6 +122,7 @@ export default function App() {
         <stack.Screen name='Projects'>
           {({ navigation }) => <ClimbsContainer
             climbs={climbs}
+            setUser={setUser}
             handleSubmit={handleSubmit}
             loggedIn={loggedIn}
             navigation={navigation}
@@ -133,8 +134,6 @@ export default function App() {
             user={user}
             setUser={setUser}
             handleLogin={handleLogin}
-            setClimbs={setClimbs}
-            loggedIn={loggedIn}
             navigation={navigation}
           />}
         </stack.Screen>

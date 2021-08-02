@@ -9,11 +9,7 @@ const SignUpForm = (props) => {
     const climbsUrl = 'http://localhost:9000/climbs'
 
     const handleSubmit = (e) => {
-        props.setUser({
-            username,
-            password
-        })
-
+   
         const reqBody = { user: { username, password } }
 
         props.handleLogin('POST', reqBody, userUrl)
@@ -21,7 +17,12 @@ const SignUpForm = (props) => {
                 if (data.massege) {
                     setError(data.massege)
                 } else {
+                    console.log('started sign up')
                     AsyncStorage.setItem('token', data.token)
+                    .then(() => props.setUser({
+                        username,
+                        password
+                    }))
                 }
             })
     }

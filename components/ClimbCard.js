@@ -27,8 +27,8 @@ const ClimbCard = (props) => {
     }
 
     const sendClimb = () => {
-        setSent(!sent)
-        const reqBody = { sent: sent }
+        setSent(!send)
+        const reqBody = { sent: !send }
         handleSubmit('PATCH', climbUrl, reqBody)
         Alert.alert(`Congrats you sent ${props.climb.name} in ${props.climb.sessions} sessions`)
     }
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         margin: 5,
         paddingLeft: 5,
         borderRadius: 20,
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
     },
     cardContentTitle: {
         padding: 5,

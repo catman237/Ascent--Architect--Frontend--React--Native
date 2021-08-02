@@ -9,10 +9,6 @@ const LoginForm = (props) => {
     const climbsUrl = 'http://localhost:9000/climbs'
 
     const handleSubmit = (e) => {
-        props.setUser({
-            username,
-            password
-        })
 
         const reqBody = { user: { username, password } }
 
@@ -21,7 +17,12 @@ const LoginForm = (props) => {
                 if (data.message) {
                     setError(data.message)
                 } else {
+                    console.log("whats this", data)
                     AsyncStorage.setItem('token', data.token)
+                        .then(() => props.setUser({
+                            username,
+                            password
+                        }))
                     props.navigation.push('Projects')
                 }
 
@@ -30,11 +31,11 @@ const LoginForm = (props) => {
 
 
     return (
-        
+
         <View style={styles.form}>
-          
+
             <Text style={styles.formText}>Welcome Back</Text>
-            
+
             <TextInput
                 style={styles.formInput}
                 placeholder="Username"
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
         color: '#FFEECF',
         fontSize: 50,
         fontWeight: 'bold',
-    },  
+    },
     formInput: {
         borderWidth: 1,
         width: 300,

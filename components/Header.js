@@ -1,19 +1,12 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
 
 const Header = (props) => {
     const logoutUrl = 'http://localhost:9000/logout'
 
     const logout = () => {
-        // const options = {
-        //     'method': "GET",
-        //     'headers': {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify()
-        // }
-        // fetch(logoutUrl, options)
+        AsyncStorage.removeItem('token')
+        props.setUser()
         props.navigation.popToTop()
     }
 

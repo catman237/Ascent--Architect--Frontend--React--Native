@@ -1,14 +1,11 @@
 import React from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import ClimbCard from './ClimbCard'
+import SentClimbCard from './SentClimbCard'
 
 const SentProjects = (props) => {
-
-  console.log(props)
-
   const showSentClimbs = () => {
     return props.climbs.filter(climb => climb.sent === true).map(climb => {
-      return <ClimbCard
+      return <SentClimbCard
         climb={climb}
         key={climb.id}
       />
