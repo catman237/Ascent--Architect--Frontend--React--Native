@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Home from './components/Home';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
+import SentProjects from './components/SentProjects';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
@@ -91,8 +92,15 @@ export default function App() {
     <NavigationContainer>
       <stack.Navigator>
 
-        <stack.Screen name='Home'>
+        <stack.Screen name='Welcome'>
           {(stackProps) => <Home
+            climbs={climbs}
+            {...stackProps}
+          />}
+        </stack.Screen>
+
+        <stack.Screen name='Sent Projects'>
+          {(stackProps) => <SentProjects
             climbs={climbs}
             {...stackProps}
           />}
