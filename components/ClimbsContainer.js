@@ -4,10 +4,13 @@ import ClimbCard from './ClimbCard'
 import  Header  from './Header';
 
 const ClimbsContainer = (props) => {
+    console.log("props from climbcontainer", props.climbs)
     const showClimbs = () => {
         return props.climbs.filter(climb => climb.sent === false).map(climb => {
             return <ClimbCard 
                 climb={climb}
+                setUser={props.setUser}
+                user={props.user}
                 key={climb.id}
                 handleSubmit={props.handleSubmit}
             />

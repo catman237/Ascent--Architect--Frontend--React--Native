@@ -28,6 +28,12 @@ const AddAClimb = (props) => {
         props.navigation.goBack()
     }
 
+    const addClimb = () => {
+        props.handleSubmit('POST', climbsURL, reqBody)
+        .then(newClimb => props.setClimbs([ ...props.climbs, newClimb ]))
+        formReset()
+    }
+
     return (
         <View style={styles.formContainer} >
 
@@ -80,7 +86,7 @@ const AddAClimb = (props) => {
                 <Button
                     title='Add This Climb'
                     style={styles.button}
-                    onPress={() => props.handleSubmit('POST' ,climbsURL, reqBody, formReset())} />
+                    onPress={addClimb} />
             </View>
 
         </View>

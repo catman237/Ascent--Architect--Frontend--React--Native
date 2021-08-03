@@ -16,7 +16,7 @@ export default function App() {
 
 
   const backgroundPhoto = 'https://www.planetmountain.com/Rock/falesie/106/margalef.jpg'
-  const climbsUrl = 'http://localhost:9000/climbs'
+  const profileUrl = 'http://localhost:9000/profile'
 
   const [climbs, setClimbs] = useState([])
   const [user, setUser] = useState()
@@ -44,7 +44,6 @@ export default function App() {
 
   const handleSubmit = async (method, url, body) => {
     const token = await AsyncStorage.getItem('token');
-    console.log(token)
     const options = {
       'method': method,
       'headers': {
@@ -55,39 +54,11 @@ export default function App() {
       body: JSON.stringify(body)
     }
 
-    fetch(url, options)
+    return fetch(url, options)
       .then(resp => resp.json())
-      .then(() => {
-        fetch(climbsUrl, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-          .then(res => res.json())
-          .then(climbs => setClimbs(climbs))
-      })
   }
 
-  useEffect(() => {
-    const refreshClimbs = async () => {
-      const token = await AsyncStorage.getItem('token');
-      console.log(token)
-      fetch(climbsUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then(res => res.json())
-        .then(climbs => setClimbs(climbs))
-    }
-    if (user) {
-      refreshClimbs();
-    }
-
-  }, [user])
-
   const stack = createStackNavigator()
-
   return (
     <NavigationContainer>
       <stack.Navigator>
@@ -123,6 +94,7 @@ export default function App() {
           {({ navigation }) => <ClimbsContainer
             climbs={climbs}
             setUser={setUser}
+            user={user}
             handleSubmit={handleSubmit}
             loggedIn={loggedIn}
             navigation={navigation}
@@ -135,6 +107,8 @@ export default function App() {
             setUser={setUser}
             handleLogin={handleLogin}
             navigation={navigation}
+            setClimbs={setClimbs}
+            climbs={climbs}
           />}
         </stack.Screen>
 
@@ -142,6 +116,8 @@ export default function App() {
           {({ navigation }) => <AddAClimb
             handleSubmit={handleSubmit} 
             navigation={navigation}
+            climbs={climbs}
+            setClimbs={setClimbs}
             />}
         </stack.Screen>
         

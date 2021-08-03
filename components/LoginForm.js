@@ -6,7 +6,6 @@ const LoginForm = (props) => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const loginUrl = 'http://localhost:9000/login'
-    const climbsUrl = 'http://localhost:9000/climbs'
 
     const handleSubmit = (e) => {
 
@@ -17,15 +16,12 @@ const LoginForm = (props) => {
                 if (data.message) {
                     setError(data.message)
                 } else {
-                    console.log("whats this", data)
                     AsyncStorage.setItem('token', data.token)
-                        .then(() => props.setUser({
-                            username,
-                            password
-                        }))
+                    // console.log('1', data.user.username)
+                    props.setClimbs(data.user.climbs)
+                    // props.setUser({ username: data.user.username, password: data.user.password_digest })
                     props.navigation.push('Projects')
                 }
-
             })
     }
 
