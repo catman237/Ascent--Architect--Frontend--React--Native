@@ -19,14 +19,6 @@ const ClimbsContainer = (props) => {
                 handleSubmit={props.handleSubmit}
             />
         })
-        // return props.climbs.map(climb => {
-        //     return <ClimbCard
-        //         climb={climb}
-        //         key={climb.id}
-        //         handleSubmit={props.handleSubmit}
-        //         loggedIn={props.loggedIn}
-        //         setLoggedIn={props.setLoggedIn} />
-        // })
     }
 
     return (

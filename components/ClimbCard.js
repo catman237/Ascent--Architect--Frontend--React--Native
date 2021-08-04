@@ -21,7 +21,7 @@ const ClimbCard = (props) => {
     const removeClimb = () => {
         handleSubmit('DELETE', climbUrl)
         .then(resp => {
-         const remainingClimbs = props.climbs.filter(climb => climb.id !== resp[0].id)
+         const remainingClimbs = props.climbs.filter(climb => climb.id !== resp.id)
          props.setClimbs(remainingClimbs)
         }) 
         Alert.alert(`Deleted ${props.climb.name}`)
@@ -35,7 +35,7 @@ const ClimbCard = (props) => {
             const existingClimbs = props.climbs.filter( climb => climb.id !== updatedClimb.id )
             props.setClimbs([...existingClimbs, updatedClimb])
         })
-        Alert.alert(`Congrats you sent ${props.climb.name} in ${props.climb.sessions} sessions`)
+        Alert.alert(`Congrats you sent ${props.climb.name} in ${sessions} sessions`)
     }
 
     return (
