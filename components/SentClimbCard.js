@@ -3,14 +3,41 @@ import { View, Text, StyleSheet } from 'react-native'
 
 const SentClimbCard = (props) => {
     return (
-     <View style={styles.climbCard}>
-      <Text style={styles.cardContentTitle}>{props.climb.name}</Text>
-            <Text style={styles.cardContent}>Grade: {props.climb.grade}</Text>
-            <Text style={styles.cardContent}>Description: {props.climb.description}</Text>
-            <Text style={styles.cardContent}>Sessions: {props.climb.sessions}</Text>
-            <Text style={styles.cardContent}>Terrain: {props.climb.terrain}</Text>
-            <Text style={styles.cardContent}>Height: {props.climb.height}</Text>
-     </View>
+        <View style={styles.climbCard}>
+            
+            
+            <View style={styles.cardContentContainer}>
+            <Text style={styles.cardContentTitle}>{props.climb.name}</Text>
+            <Text style={styles.check}>✔</Text>
+            </View>
+
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Grade:</Text>
+                <Text style={styles.userText}> {props.climb.grade}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Description:</Text>
+                <Text style={styles.userText}> {props.climb.description}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Sessions:</Text>
+                <Text style={styles.userText}> {props.climb.sessions}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Terrain:</Text>
+                <Text style={styles.userText}> {props.climb.terrain}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Height: </Text>
+                <Text style={styles.userText}>{props.climb.height}</Text>
+            </View>
+
+        </View>
     )
 }
 
@@ -24,17 +51,28 @@ const styles = StyleSheet.create({
         paddingLeft: 5,
         borderRadius: 20,
         backgroundColor: '#FFFFFF',
-        alignItems: 'center',
-        height: 250
-
+        height: 175
+    },
+    cardContentContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     cardContentTitle: {
         padding: 5,
-        fontWeight: 'bold',
-        fontSize: 25
+        fontWeight: '700',
+        fontSize: 28,
+        textDecorationLine: 'underline'
     },
     cardContent: {
         padding: 3,
-        paddingLeft: 6
+        paddingLeft: 6,
+        fontWeight: 'bold',
+        color: '#3F3F3F'
     },
+    userText: {
+
+    },
+    check: {
+        paddingLeft: 5
+    }
 })

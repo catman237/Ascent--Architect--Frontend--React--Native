@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Alert, AsyncStorage, RecyclerViewBackedScrollView } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, Text, TouchableOpacity, Alert, AsyncStorage } from 'react-native'
 
 const ClimbCard = (props) => {
     const climbUrl = `http://localhost:9000/climbs/${props.climb.id}`
@@ -7,7 +7,7 @@ const ClimbCard = (props) => {
     const initSession = props.climb.sessions
     const send = props.climb.sent
 
-    
+
     const [sessions, setSessions] = useState(initSession)
     const [sent, setSent] = useState(send)
 
@@ -20,10 +20,10 @@ const ClimbCard = (props) => {
 
     const removeClimb = () => {
         handleSubmit('DELETE', climbUrl)
-        .then(resp => {
-         const remainingClimbs = props.climbs.filter(climb => climb.id !== resp.id)
-         props.setClimbs(remainingClimbs)
-        }) 
+            .then(resp => {
+                const remainingClimbs = props.climbs.filter(climb => climb.id !== resp.id)
+                props.setClimbs(remainingClimbs)
+            })
         Alert.alert(`Deleted ${props.climb.name}`)
     }
 
@@ -31,21 +31,42 @@ const ClimbCard = (props) => {
         setSent(!send)
         const reqBody = { sent: !send }
         handleSubmit('PATCH', climbUrl, reqBody)
-        .then(updatedClimb => {
-            const existingClimbs = props.climbs.filter( climb => climb.id !== updatedClimb.id )
-            props.setClimbs([...existingClimbs, updatedClimb])
-        })
+            .then(updatedClimb => {
+                const existingClimbs = props.climbs.filter(climb => climb.id !== updatedClimb.id)
+                props.setClimbs([...existingClimbs, updatedClimb])
+            })
         Alert.alert(`Congrats you sent ${props.climb.name} in ${sessions} sessions`)
     }
 
     return (
         <View style={styles.climbCard}>
             <Text style={styles.cardContentTitle}>{props.climb.name}</Text>
-            <Text style={styles.cardContent}>Grade: {props.climb.grade}</Text>
-            <Text style={styles.cardContent}>Description: {props.climb.description}</Text>
-            <Text style={styles.cardContent}>Sessions: {sessions}</Text>
-            <Text style={styles.cardContent}>Terrain: {props.climb.terrain}</Text>
-            <Text style={styles.cardContent}>Height: {props.climb.height}</Text>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Grade:</Text>
+                <Text style={styles.userText}>{props.climb.grade}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Description:</Text>
+                <Text style={styles.userText}>{props.climb.description}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Sessions:</Text>
+                <Text style={styles.userText}>{props.climb.sessions}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Terrain:</Text>
+                <Text style={styles.userText}>{props.climb.terrain}</Text>
+            </View>
+
+            <View style={styles.cardContentContainer}>
+                <Text style={styles.cardContent}>Height:</Text>
+                <Text style={styles.userText}>{props.climb.height}</Text>
+            </View>
+
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
                     style={styles.buttonP}
@@ -82,14 +103,24 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: '#FFFFFF',
     },
+    cardContentContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
     cardContentTitle: {
         padding: 5,
-        fontWeight: 'bold',
-        fontSize: 25
+        fontWeight: '700',
+        fontSize: 28,
+        textDecorationLine: 'underline'
     },
     cardContent: {
         padding: 3,
-        paddingLeft: 6
+        paddingLeft: 6,
+        fontWeight: 'bold',
+        color: '#3F3F3F'
+    },
+    userText: {
+
     },
     buttonContainer: {
         flex: 1,
@@ -104,7 +135,7 @@ const styles = StyleSheet.create({
         height: 25,
         width: 100,
         margin: 3,
-        backgroundColor: '#FA7E61'
+        backgroundColor: '#CDE8F4'
     },
     buttonS: {
         flex: 1,
@@ -129,4 +160,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#F9F7F3'
     }
 })
-    
+

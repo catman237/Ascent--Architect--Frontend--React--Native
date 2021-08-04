@@ -13,7 +13,6 @@ import SentProjects from './components/SentProjects';
 
 export default function App() {
 
-
   const backgroundPhoto = 'https://www.planetmountain.com/Rock/falesie/106/margalef.jpg'
   const profileUrl = 'http://localhost:9000/profile'
 
@@ -26,7 +25,6 @@ export default function App() {
   const [toggle2, setToggle2] = useState(true)
   const [stale, setStale] = useState(false)
   const [loggedIn, setLoggedIn] = useState(false)
-
 
   const handleLogin = (method, body, url) => {
     const options = {
@@ -178,52 +176,3 @@ const styles = StyleSheet.create({
     borderRadius: 30,
   }
 });
-// const switchScreens = (setState, state) => {
-//   setState(!state)
-// }
-
-// <SafeAreaView style={styles.container}>
-
-//   <Image source={{ uri: photo }} style={styles.photo}></Image>
-
-//   <View style={styles.buttonContainer}>
-
-//     <View style={styles.flexRow}>
-//       <TouchableOpacity style={styles.buttonL}
-//         onPress={() => switchScreens(setToggle2, toggle2)}>
-//         <Text>New Project</Text>
-//       </TouchableOpacity>
-//     </View>
-
-//     <View style={styles.flexRow} >
-//       <TouchableOpacity style={styles.buttonR}
-//         onPress={() => switchScreens(setToggle1, toggle1)}>
-//         <Text>My Projects</Text>
-//       </TouchableOpacity>
-//     </View>
-
-
-//   </View>
-
-//   <View style={{ flex: 1 }}>
-
-//     {toggle2
-//       ?
-//       null
-//       :
-//       <AddAClimb 
-//       setStale={setStale} />
-//     }
-
-
-//     {toggle1
-//       ?
-//       <ClimbsContainer
-//         climbs={climbs}
-//         style={styles.climbsContainer}
-//         handleSubmit={handleSubmit} />
-//       :
-//       null}
-//   </View>
-
-// </SafeAreaView>
