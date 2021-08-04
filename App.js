@@ -9,7 +9,6 @@ import Home from './components/Home';
 import SignUpForm from './components/SignUpForm';
 import LoginForm from './components/LoginForm';
 import SentProjects from './components/SentProjects';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 
 
 export default function App() {
@@ -73,6 +72,8 @@ export default function App() {
         <stack.Screen name='Sent Projects'>
           {(stackProps) => <SentProjects
             climbs={climbs}
+            sentClimbs={sentClimbs}
+            setSentClimbs={setSentClimbs}
             {...stackProps}
           />}
         </stack.Screen>
@@ -95,6 +96,9 @@ export default function App() {
             climbs={climbs}
             setUser={setUser}
             user={user}
+            setClimbs={setClimbs}
+            sentClimbs={sentClimbs}
+            setSentClimbs={setSentClimbs}
             handleSubmit={handleSubmit}
             loggedIn={loggedIn}
             navigation={navigation}

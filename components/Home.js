@@ -46,15 +46,15 @@ export default Home
 
 const styles = StyleSheet.create({
     homePage: {
-        
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#222E50' //mainBlue
     },
     title: {
+        color: '#FFEECF',
         fontSize: 50,
-        color: '#B5CA8D' //olivine
+        fontWeight: 'bold',
     },
     button: {
         alignItems: 'center',

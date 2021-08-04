@@ -6,8 +6,11 @@ const SentProjects = (props) => {
   const showSentClimbs = () => {
     return props.climbs.filter(climb => climb.sent === true).map(climb => {
       return <SentClimbCard
+        climbs={props.climbs}
         climb={climb}
         key={climb.id}
+        setSentclimbs={props.setSentClimbs}
+        sentclimbs={props.sentClimbs}
       />
     })
   }

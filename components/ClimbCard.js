@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Alert, AsyncStorage } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity, Alert, AsyncStorage, RecyclerViewBackedScrollView } from 'react-native'
 
 const ClimbCard = (props) => {
-
     const climbUrl = `http://localhost:9000/climbs/${props.climb.id}`
     const handleSubmit = props.handleSubmit
     const initSession = props.climb.sessions
     const send = props.climb.sent
-    
 
+    
     const [sessions, setSessions] = useState(initSession)
     const [sent, setSent] = useState(send)
 
-
-    
     const addSession = () => {
         const newSessions = sessions + 1
         setSessions(newSessions)
@@ -23,6 +20,10 @@ const ClimbCard = (props) => {
 
     const removeClimb = () => {
         handleSubmit('DELETE', climbUrl)
+        .then(resp => {
+         const remainingClimbs = props.climbs.filter(climb => climb.id !== resp[0].id)
+         props.setClimbs(remainingClimbs)
+        }) 
         Alert.alert(`Deleted ${props.climb.name}`)
     }
 
@@ -30,6 +31,10 @@ const ClimbCard = (props) => {
         setSent(!send)
         const reqBody = { sent: !send }
         handleSubmit('PATCH', climbUrl, reqBody)
+        .then(updatedClimb => {
+            const existingClimbs = props.climbs.filter( climb => climb.id !== updatedClimb.id )
+            props.setClimbs([...existingClimbs, updatedClimb])
+        })
         Alert.alert(`Congrats you sent ${props.climb.name} in ${props.climb.sessions} sessions`)
     }
 
@@ -124,4 +129,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#F9F7F3'
     }
 })
-
+    
