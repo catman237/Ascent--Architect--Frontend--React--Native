@@ -76,7 +76,7 @@ export default function App() {
           />}
         </stack.Screen>
 
-        <stack.Screen name='Sign Up'>
+      <stack.Screen name='Sign Up'>
           {({ navigation }) => <SignUpForm
                 user={user}
                 setUser={setUser}

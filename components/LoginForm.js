@@ -17,7 +17,7 @@ const LoginForm = (props) => {
                     setError(data.message)
                 } else {
                     AsyncStorage.setItem('token', data.token)
-                    // console.log('1', data.user.username)
+                    console.log(data)
                     props.setClimbs(data.user.climbs)
                     // props.setUser({ username: data.user.username, password: data.user.password_digest })
                     props.navigation.push('Projects')

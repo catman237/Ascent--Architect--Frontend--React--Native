@@ -54,7 +54,7 @@ const ClimbCard = (props) => {
 
             <View style={styles.cardContentContainer}>
                 <Text style={styles.cardContent}>Sessions:</Text>
-                <Text style={styles.userText}>{props.climb.sessions}</Text>
+                <Text style={styles.userText}>{sessions}</Text>
             </View>
 
             <View style={styles.cardContentContainer}>
