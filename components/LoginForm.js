@@ -91,12 +91,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 120,
         height: 30,
-        borderWidth: .5,
+        borderWidth: 1,
         borderRadius: 8,
         marginTop: 20,
         backgroundColor: '#B5CA8D',  //olivine      
     },
     buttonText: {
         fontSize: 16,
+        fontWeight: '600'
     }
 })

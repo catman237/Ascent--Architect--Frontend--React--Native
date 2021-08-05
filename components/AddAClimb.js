@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Button, TouchableOpacity } from 'react-native'
 import { set } from 'react-native-reanimated'
 
 const AddAClimb = (props) => {
@@ -30,63 +30,72 @@ const AddAClimb = (props) => {
 
     const addClimb = () => {
         props.handleSubmit('POST', climbsURL, reqBody)
-        .then(newClimb => props.setClimbs([ ...props.climbs, newClimb ]))
+            .then(newClimb => props.setClimbs([...props.climbs, newClimb]))
         formReset()
     }
 
     return (
-        <View style={styles.formContainer} >
+        <View style={styles.page} >
 
-            <Text style={styles.header}>Climb Form</Text>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Climb Form</Text>
+            </View>
 
-            <TextInput
-                style={styles.inputContainer}
-                placeholder="Route name"
-                value={name}
-                onChangeText={text => setName(text)}
-            />
+            <View stlye={styles.formContainer}>
 
-            <TextInput
-                style={styles.inputContainer}
-                placeholder="Grade"
-                value={grade}
-                onChangeText={text => setGrade(text)}
-            />
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="Route name"
+                    value={name}
+                    onChangeText={text => setName(text)}
+                />
 
-            <TextInput
-                style={styles.inputContainer}
-                placeholder="Description"
-                value={description}
-                onChangeText={text => setDescription(text)}
-            />
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="Grade"
+                    value={grade}
+                    onChangeText={text => setGrade(text)}
+                />
 
-            <TextInput
-                style={styles.inputContainer}
-                placeholder="Sessions"
-                value={sessions}
-                keyboardType={'numbers-and-punctuation'}
-                onChangeText={text => setSessions(text)}
-            />
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="Description"
+                    value={description}
+                    onChangeText={text => setDescription(text)}
+                />
 
-            <TextInput
-                style={styles.inputContainer}
-                placeholder="Terrain"
-                value={terrain}
-                onChangeText={text => setTerrain(text)}
-            />
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="Sessions"
+                    value={sessions}
+                    keyboardType={'numbers-and-punctuation'}
+                    onChangeText={text => setSessions(text)}
+                />
 
-            <TextInput
-                style={styles.inputContainer}
-                placeholder="Height"
-                value={height}
-                onChangeText={text => setHeight(text)}
-            />
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="Terrain"
+                    value={terrain}
+                    onChangeText={text => setTerrain(text)}
+                />
 
-            <View style={styles.buttonContainer}>
-                <Button
-                    title='Add This Climb'
-                    style={styles.button}
-                    onPress={addClimb} />
+                <TextInput
+                    style={styles.inputContainer}
+                    placeholder="Height"
+                    value={height}
+                    onChangeText={text => setHeight(text)}
+                />
+
+                <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                        title='Sign Up'
+                        onPress={addClimb}
+                        style={styles.button}
+                    >
+                        <Text style={styles.buttonText}> Add a project </Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
 
         </View>
@@ -99,6 +108,23 @@ export default AddAClimb
 
 const styles = StyleSheet.create({
 
+    page: {
+        alignItems: 'center',
+        flex: 1,
+        backgroundColor: '#222E50'
+    },
+    titleContainer: {
+        marginTop: 50,
+        marginBottom: 50
+    },
+    title: {
+        color: '#FFEECF',
+        fontSize: 50,
+        fontWeight: 'bold',
+    },
+    formContainer: {
+        padding: 100
+    },
     inputContainer: {
         borderWidth: 1,
         borderColor: '#B5CA8D',
@@ -106,29 +132,22 @@ const styles = StyleSheet.create({
         width: 300,
         height: 40,
         borderRadius: 40 / 2,
-        marginTop: 10,
+        marginTop: 15,
         padding: 10,
         margin: 5
     },
-    formContainer: {
-        height: 300,
-        alignItems: 'center',
-        paddingTop: 100,
-        flex: 1,
-        backgroundColor: '#222E50'
-    },
     buttonContainer: {
         backgroundColor: '#ADC698',
-        borderWidth: 1,
+        borderWidth: 2,
         width: 300,
         height: 40,
         borderRadius: 40 / 2,
-        marginTop: 10,
-
+        marginTop: 15,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    header: {
-        color: '#FFEECF',
-        fontSize: 50,
-        fontWeight: 'bold',
+    buttonText: {
+        fontSize: 20,
+        fontWeight: "600"
     }
 })

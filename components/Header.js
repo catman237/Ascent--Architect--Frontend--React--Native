@@ -15,6 +15,7 @@ const Header = (props) => {
             <View style={styles.button}>
                 <TouchableOpacity>
                     <Text
+                        style={styles.text}
                         onPress={() => props.navigation.push('Add a project')}
                     > Add a project </Text>
                 </TouchableOpacity>
@@ -22,6 +23,7 @@ const Header = (props) => {
             <View style={styles.button}>
                 <TouchableOpacity>
                     <Text
+                        style={styles.text}
                         onPress={() => props.navigation.push('Sent Projects')}
                     > Sent projects </Text>
                 </TouchableOpacity>
@@ -29,6 +31,7 @@ const Header = (props) => {
             <View style={styles.button}>
                 <TouchableOpacity>
                     <Text
+                        style={styles.text}
                         onPress={() => logout()}
                     > Sign out </Text>
                 </TouchableOpacity>
@@ -52,10 +55,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 120,
         height: 30,
-        borderWidth: .5,
+        borderWidth: 1,
         borderRadius: 8,
         marginTop: 20,
         marginLeft: 5,
         backgroundColor: '#B5CA8D',  //olivine      
     },
+    text: {
+        fontWeight: '600',
+        fontSize: 16
+    }
 })

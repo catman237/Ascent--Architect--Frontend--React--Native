@@ -71,20 +71,20 @@ const ClimbCard = (props) => {
                 <TouchableOpacity
                     style={styles.buttonP}
                     onPress={() => addSession()}>
-                    <Text>Projected</Text>
+                    <Text style={styles.buttonText}>Projected</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={styles.buttonS}
                     onPress={() => sendClimb()}>
-                    <Text>Sent</Text>
+                    <Text style={styles.buttonText}>Sent</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={styles.buttonR}
                     onPress={() => removeClimb()}
                 >
-                    <Text>Remove</Text>
+                    <Text style={styles.buttonText}>Remove</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -158,6 +158,10 @@ const styles = StyleSheet.create({
         width: 100,
         margin: 3,
         backgroundColor: '#F9F7F3'
+    },
+    buttonText: {
+        fontWeight: '600',
+        fontSize: 13
     }
 })
 
