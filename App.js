@@ -13,18 +13,9 @@ import SentProjects from './components/SentProjects';
 
 export default function App() {
 
-  const backgroundPhoto = 'https://www.planetmountain.com/Rock/falesie/106/margalef.jpg'
-  const profileUrl = 'http://localhost:9000/profile'
-
   const [climbs, setClimbs] = useState([])
   const [user, setUser] = useState()
   const [sentClimbs, setSentClimbs] = useState([])
-  const [sessions, setSessions] = useState([])
-  const [photo, setPhoto] = useState(backgroundPhoto)
-  const [toggle1, setToggle1] = useState(false)
-  const [toggle2, setToggle2] = useState(true)
-  const [stale, setStale] = useState(false)
-  const [loggedIn, setLoggedIn] = useState(false)
 
   const handleLogin = (method, body, url) => {
     const options = {
@@ -83,7 +74,6 @@ export default function App() {
                 handleLogin={handleLogin}
                 handleSubmit={handleSubmit}
                 setClimbs={setClimbs}
-                loggedIn={loggedIn}
                 navigation={navigation}
           />}
         </stack.Screen>
@@ -98,7 +88,6 @@ export default function App() {
             sentClimbs={sentClimbs}
             setSentClimbs={setSentClimbs}
             handleSubmit={handleSubmit}
-            loggedIn={loggedIn}
             navigation={navigation}
           />}
         </stack.Screen>
