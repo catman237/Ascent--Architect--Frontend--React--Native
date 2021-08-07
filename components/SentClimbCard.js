@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
         padding: 5,
         fontWeight: '700',
         fontSize: 28,
-        textDecorationLine: 'underline'
     },
     descriptionText: {
         flexWrap: 'wrap'

@@ -12,6 +12,7 @@ const Header = (props) => {
 
     return (
         <View style={styles.HeaderContainer}>
+            
             <View style={styles.button}>
                 <TouchableOpacity>
                     <Text
@@ -20,6 +21,7 @@ const Header = (props) => {
                     > Add a project </Text>
                 </TouchableOpacity>
             </View>
+
             <View style={styles.button}>
                 <TouchableOpacity>
                     <Text
@@ -28,6 +30,7 @@ const Header = (props) => {
                     > Sent projects </Text>
                 </TouchableOpacity>
             </View>
+
             <View style={styles.button}>
                 <TouchableOpacity>
                     <Text
@@ -36,6 +39,7 @@ const Header = (props) => {
                     > Sign out </Text>
                 </TouchableOpacity>
             </View>
+
         </View>
     )
 }

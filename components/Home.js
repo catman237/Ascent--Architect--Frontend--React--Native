@@ -90,9 +90,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 8,
         margin: 50,
-        backgroundColor: '#B5CA8D',
-          //olivine  
-
+        backgroundColor: '#B5CA8D', //olivine  
     },
     buttonText: {
         fontSize: 16,

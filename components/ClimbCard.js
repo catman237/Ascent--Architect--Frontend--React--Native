@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
         padding: 5,
         fontWeight: '700',
         fontSize: 28,
-        textDecorationLine: 'underline'
     },
     cardContent: {
         padding: 3,
@@ -135,7 +134,8 @@ const styles = StyleSheet.create({
         height: 25,
         width: 100,
         margin: 3,
-        backgroundColor: '#CDE8F4'
+        backgroundColor: '#CDE8F4',
+        
     },
     buttonS: {
         flex: 1,

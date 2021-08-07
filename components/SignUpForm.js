@@ -17,7 +17,6 @@ const SignUpForm = (props) => {
                 if (data.massege) {
                     setError(data.massege)
                 } else {
-                    console.log('started sign up')
                     AsyncStorage.setItem('token', data.token)
                     .then(() => props.setUser({
                         username,
