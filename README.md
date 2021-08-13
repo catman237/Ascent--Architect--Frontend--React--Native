@@ -1,8 +1,6 @@
-# Ascent--Architect--React--Native
+# Ascent--Architect--Frontend
 
-Ascent Architect Frontend
-
-Constructed the React_native framework.
+Constructed the React Native framework for mobile use.
 
 React Navigation used for the routing.
 
